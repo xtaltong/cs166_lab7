@@ -16,7 +16,7 @@ as totalParts;
 SELECT S.supplier_id, S.supplier_name
 FROM supplier S 
 WHERE (SELECT SUM(N.on_hand) FROM part_nyc N WHERE S.supplier_id = N.supplier)
-> (SELECT SUM(S.on_hand) FROM part_sfo F WHERE S.supplier_id = F.suppler);
+> (SELECT SUM(F.on_hand) FROM part_sfo F WHERE S.supplier_id = F.suppler);
 
 SELECT S.supplier_id, S.supplier_name
 FROM supplier S, part_nyc N, part_sfo F
