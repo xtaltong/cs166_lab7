@@ -19,7 +19,7 @@ FROM supplier S
 WHERE (SELECT SUM(N.on_hand) FROM part_nyc N WHERE S.supplier_id = N.supplier)
 > (SELECT SUM(F.on_hand) FROM part_sfo F WHERE S.supplier_id = F.supplier);
 
-SELECT S.supplier_id, S.supplier_name
+SELECT DISTINCT S.supplier_id, S.supplier_name
 FROM supplier S, part_nyc N, part_sfo F
 WHERE S.supplier_id = N.supplier AND N.part_number != F.part_number;
 /*reference: w3schools.com/sql/sql_update.asp */
