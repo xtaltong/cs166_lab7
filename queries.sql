@@ -17,16 +17,16 @@ SELECT S.supplier_id, S.supplier_name
 FROM supplier S 
 WHERE 
 (SELECT SUM(N.on_hand)
-FROM part_nyc N
+FROM supplier S, part_nyc N
 WHERE S.supplier_id = N.supplier)
 > 
 (SELECT SUM(S.on_hand)
-FROM part_sfo F
+FROM supplier S, part_sfo F
 WHERE S.supplier_id = F.suppler);
 
 SELECT S.supplier_id, S.supplier_name
 FROM supplier S, part_nyc N, part_sfo F
-WHERE S.supplier_id = N.supplier AND ANY(N.part_number != F.part_number);
+WHERE S.supplier_id = N.supplier AND EXISTS(SELECT N.part_number FROM part_nyc, part_sfo F WHERE N.part_number != F.part_number);
 
 /*reference: w3schools.com/sql/sql_update.asp */
 UPDATE part_nyc
