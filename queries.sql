@@ -1,3 +1,4 @@
+\timing
 SELECT COUNT(*)
 FROM part_nyc N
 WHERE N.on_hand > 70;
